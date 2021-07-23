@@ -39,7 +39,7 @@ export function activate(extensionContext: ExtensionContext) {
 }
 /**
  * Group by filePattern to register fewer `documentLinkProvider`s.
- * Create regexp from linkPattern (global, case-insensitive)
+ * Create regexp from linkPattern (with global flag)
  */
 function updateQueries() {
 	const groupedQueries = groupBy(extensionConfig.queries, 'filePattern' as keyof ExtensionConfig['queries'][number]) as Dictionary<{
