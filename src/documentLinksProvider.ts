@@ -38,7 +38,7 @@ export function updateDocumentLinkProvider() {
 									range: new Range(i, match.index, i, match[0].length + match.index),
 									target: Uri.from({
 										scheme: env.uriScheme,
-										authority: Constants.extensionId,
+										authority: Constants.ExtensionId,
 										query: query.linkText,
 										fragment: match[1],
 									}),

@@ -5,9 +5,9 @@ import { updateDocumentLinkProvider } from './documentLinksProvider';
 import { ExtensionConfig, StateQueries } from './types';
 
 export const enum Constants {
-	extensionId = 'usernamehw.autolink',
-	extensionName = 'autolink',
-	variableText = '${0}',
+	ExtensionId = 'usernamehw.autolink',
+	ExtensionName = 'autolink',
+	VariableText = '${0}',
 }
 
 export let extensionConfig: ExtensionConfig;
@@ -21,7 +21,7 @@ export function activate(extensionContext: ExtensionContext) {
 	updateEverything();
 
 	function updateConfig() {
-		extensionConfig = workspace.getConfiguration().get(Constants.extensionName) as ExtensionConfig;
+		extensionConfig = workspace.getConfiguration().get(Constants.ExtensionName) as ExtensionConfig;
 	}
 
 	function updateEverything() {
@@ -30,7 +30,7 @@ export function activate(extensionContext: ExtensionContext) {
 	}
 
 	extensionContext.subscriptions.push(workspace.onDidChangeConfiguration(e => {
-		if (!e.affectsConfiguration(Constants.extensionName)) {
+		if (!e.affectsConfiguration(Constants.ExtensionName)) {
 			return;
 		}
 		updateConfig();

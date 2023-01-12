@@ -3,18 +3,18 @@ import path from 'path';
 import { env, window, workspace } from 'vscode';
 
 const enum VariableNames {
-	file = '${file}', // the current opened file (absolute path?)
-	fileBasename = '${fileBasename}', // the current opened file's basename
-	fileBasenameNoExtension = '${fileBasenameNoExtension}', // the current opened file's basename with no file extension
-	fileExtname = '${fileExtname}', // the current opened file's extension
-	fileDirname = '${fileDirname}', // the current opened file's dirname
-	fileWorkspaceFolder = '${fileWorkspaceFolder}', // the current opened file's workspace folder (no idea)
-	workspaceFolder = '${workspaceFolder}', // the path of the folder opened in VS Code
-	workspaceFolderBasename = '${workspaceFolderBasename}', // the name of the folder opened in VS Code without any slashes (/)
-	execPath = '${execPath}', //  location of Code.exe
-	pathSeparator = '${pathSeparator}', // `/` on macOS or linux, `\` on Windows
-	lineNumber = '${lineNumber}', // the current selected line number in the active file
-	selectedText = '${selectedText}', // the current selected text in the active file
+	File = '${file}', // the current opened file (absolute path?)
+	FileBasename = '${fileBasename}', // the current opened file's basename
+	FileBasenameNoExtension = '${fileBasenameNoExtension}', // the current opened file's basename with no file extension
+	FileExtname = '${fileExtname}', // the current opened file's extension
+	FileDirname = '${fileDirname}', // the current opened file's dirname
+	FileWorkspaceFolder = '${fileWorkspaceFolder}', // the current opened file's workspace folder (no idea)
+	WorkspaceFolder = '${workspaceFolder}', // the path of the folder opened in VS Code
+	WorkspaceFolderBasename = '${workspaceFolderBasename}', // the name of the folder opened in VS Code without any slashes (/)
+	ExecPath = '${execPath}', //  location of Code.exe
+	PathSeparator = '${pathSeparator}', // `/` on macOS or linux, `\` on Windows
+	LineNumber = '${lineNumber}', // the current selected line number in the active file
+	SelectedText = '${selectedText}', // the current selected text in the active file
 	// ────────────────────────────────────────────────────────────
 	// relativeFile = '${relativeFile}', // the current opened file relative to `workspaceFolder`
 	// relativeFileDirname = '${relativeFileDirname}', // the current opened file's dirname relative to `workspaceFolder`
@@ -22,18 +22,18 @@ const enum VariableNames {
 }
 
 const variableRegexps = {
-	[VariableNames.file]: new RegExp(escapeRegExp(VariableNames.file), 'ig'),
-	[VariableNames.fileBasename]: new RegExp(escapeRegExp(VariableNames.fileBasename), 'ig'),
-	[VariableNames.fileBasenameNoExtension]: new RegExp(escapeRegExp(VariableNames.fileBasenameNoExtension), 'ig'),
-	[VariableNames.fileDirname]: new RegExp(escapeRegExp(VariableNames.fileDirname), 'ig'),
-	[VariableNames.fileExtname]: new RegExp(escapeRegExp(VariableNames.fileExtname), 'ig'),
-	[VariableNames.fileWorkspaceFolder]: new RegExp(escapeRegExp(VariableNames.fileWorkspaceFolder), 'ig'),
-	[VariableNames.workspaceFolder]: new RegExp(escapeRegExp(VariableNames.workspaceFolder), 'ig'),
-	[VariableNames.workspaceFolderBasename]: new RegExp(escapeRegExp(VariableNames.workspaceFolderBasename), 'ig'),
-	[VariableNames.execPath]: new RegExp(escapeRegExp(VariableNames.execPath), 'ig'),
-	[VariableNames.pathSeparator]: new RegExp(escapeRegExp(VariableNames.pathSeparator), 'ig'),
-	[VariableNames.lineNumber]: new RegExp(escapeRegExp(VariableNames.lineNumber), 'ig'),
-	[VariableNames.selectedText]: new RegExp(escapeRegExp(VariableNames.selectedText), 'ig'),
+	[VariableNames.File]: new RegExp(escapeRegExp(VariableNames.File), 'ig'),
+	[VariableNames.FileBasename]: new RegExp(escapeRegExp(VariableNames.FileBasename), 'ig'),
+	[VariableNames.FileBasenameNoExtension]: new RegExp(escapeRegExp(VariableNames.FileBasenameNoExtension), 'ig'),
+	[VariableNames.FileDirname]: new RegExp(escapeRegExp(VariableNames.FileDirname), 'ig'),
+	[VariableNames.FileExtname]: new RegExp(escapeRegExp(VariableNames.FileExtname), 'ig'),
+	[VariableNames.FileWorkspaceFolder]: new RegExp(escapeRegExp(VariableNames.FileWorkspaceFolder), 'ig'),
+	[VariableNames.WorkspaceFolder]: new RegExp(escapeRegExp(VariableNames.WorkspaceFolder), 'ig'),
+	[VariableNames.WorkspaceFolderBasename]: new RegExp(escapeRegExp(VariableNames.WorkspaceFolderBasename), 'ig'),
+	[VariableNames.ExecPath]: new RegExp(escapeRegExp(VariableNames.ExecPath), 'ig'),
+	[VariableNames.PathSeparator]: new RegExp(escapeRegExp(VariableNames.PathSeparator), 'ig'),
+	[VariableNames.LineNumber]: new RegExp(escapeRegExp(VariableNames.LineNumber), 'ig'),
+	[VariableNames.SelectedText]: new RegExp(escapeRegExp(VariableNames.SelectedText), 'ig'),
 	// [VariableNames.relativeFile]: new RegExp(escapeRegExp(VariableNames.relativeFile), 'ig'),
 	// [VariableNames.relativeFileDirname]: new RegExp(escapeRegExp(VariableNames.relativeFileDirname), 'ig'),
 	// [VariableNames.cwd]: new RegExp(escapeRegExp(VariableNames.cwd), 'ig'),
@@ -44,45 +44,45 @@ const variableRegexps = {
 export function substituteVariables(str: string) {
 	const activeTextEditor = window.activeTextEditor;
 	const workspaceFolder = workspace.workspaceFolders?.[0].uri.fsPath;
-	if (str.includes(VariableNames.selectedText) && activeTextEditor) {
+	if (str.includes(VariableNames.SelectedText) && activeTextEditor) {
 		const selection = activeTextEditor.selection;
 		const selectedText = activeTextEditor.document.getText(selection);
-		str = str.replace(variableRegexps[VariableNames.selectedText], selectedText);
+		str = str.replace(variableRegexps[VariableNames.SelectedText], selectedText);
 	}
-	if (str.includes(VariableNames.pathSeparator)) {
-		str = str.replace(variableRegexps[VariableNames.pathSeparator], path.sep);
+	if (str.includes(VariableNames.PathSeparator)) {
+		str = str.replace(variableRegexps[VariableNames.PathSeparator], path.sep);
 	}
-	if (str.includes(VariableNames.lineNumber) && activeTextEditor) {
-		str = str.replace(variableRegexps[VariableNames.lineNumber], String(activeTextEditor.selection.active.line + 1));
+	if (str.includes(VariableNames.LineNumber) && activeTextEditor) {
+		str = str.replace(variableRegexps[VariableNames.LineNumber], String(activeTextEditor.selection.active.line + 1));
 	}
-	if (str.includes(VariableNames.execPath)) {
-		str = str.replace(variableRegexps[VariableNames.execPath], env.appRoot);
+	if (str.includes(VariableNames.ExecPath)) {
+		str = str.replace(variableRegexps[VariableNames.ExecPath], env.appRoot);
 	}
-	if (str.includes(VariableNames.file) && activeTextEditor) {
-		str = str.replace(variableRegexps[VariableNames.file], activeTextEditor.document.uri.fsPath);
+	if (str.includes(VariableNames.File) && activeTextEditor) {
+		str = str.replace(variableRegexps[VariableNames.File], activeTextEditor.document.uri.fsPath);
 	}
-	if (str.includes(VariableNames.fileBasename) && activeTextEditor) {
-		str = str.replace(variableRegexps[VariableNames.fileBasename], path.basename(activeTextEditor.document.uri.fsPath));
+	if (str.includes(VariableNames.FileBasename) && activeTextEditor) {
+		str = str.replace(variableRegexps[VariableNames.FileBasename], path.basename(activeTextEditor.document.uri.fsPath));
 	}
-	if (str.includes(VariableNames.fileBasenameNoExtension) && activeTextEditor) {
-		str = str.replace(variableRegexps[VariableNames.fileBasenameNoExtension], path.basename(activeTextEditor.document.uri.fsPath, path.extname(activeTextEditor.document.uri.fsPath)));
+	if (str.includes(VariableNames.FileBasenameNoExtension) && activeTextEditor) {
+		str = str.replace(variableRegexps[VariableNames.FileBasenameNoExtension], path.basename(activeTextEditor.document.uri.fsPath, path.extname(activeTextEditor.document.uri.fsPath)));
 	}
-	if (str.includes(VariableNames.fileExtname) && activeTextEditor) {
-		str = str.replace(variableRegexps[VariableNames.fileExtname], path.extname(activeTextEditor.document.uri.fsPath));
+	if (str.includes(VariableNames.FileExtname) && activeTextEditor) {
+		str = str.replace(variableRegexps[VariableNames.FileExtname], path.extname(activeTextEditor.document.uri.fsPath));
 	}
-	if (str.includes(VariableNames.fileDirname) && activeTextEditor) {
-		str = str.replace(variableRegexps[VariableNames.fileDirname], path.dirname(activeTextEditor.document.uri.fsPath));
+	if (str.includes(VariableNames.FileDirname) && activeTextEditor) {
+		str = str.replace(variableRegexps[VariableNames.FileDirname], path.dirname(activeTextEditor.document.uri.fsPath));
 	}
-	if (str.includes(VariableNames.workspaceFolder) && workspaceFolder) {
-		str = str.replace(variableRegexps[VariableNames.workspaceFolder], workspaceFolder);
+	if (str.includes(VariableNames.WorkspaceFolder) && workspaceFolder) {
+		str = str.replace(variableRegexps[VariableNames.WorkspaceFolder], workspaceFolder);
 	}
-	if (str.includes(VariableNames.workspaceFolderBasename) && workspaceFolder) {
-		str = str.replace(variableRegexps[VariableNames.workspaceFolderBasename], path.basename(workspaceFolder));
+	if (str.includes(VariableNames.WorkspaceFolderBasename) && workspaceFolder) {
+		str = str.replace(variableRegexps[VariableNames.WorkspaceFolderBasename], path.basename(workspaceFolder));
 	}
-	if (str.includes(VariableNames.fileWorkspaceFolder) && activeTextEditor && workspaceFolder) {
+	if (str.includes(VariableNames.FileWorkspaceFolder) && activeTextEditor && workspaceFolder) {
 		const fileWorkspaceFolder = workspace.getWorkspaceFolder(activeTextEditor.document.uri)?.uri.fsPath;
 		if (fileWorkspaceFolder) {
-			str = str.replace(variableRegexps[VariableNames.fileWorkspaceFolder], fileWorkspaceFolder);
+			str = str.replace(variableRegexps[VariableNames.FileWorkspaceFolder], fileWorkspaceFolder);
 		}
 	}
 	return str;
