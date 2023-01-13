@@ -2,7 +2,7 @@
 	"name": "autolink",
 	"displayName": "Autolink",
 	"description": "Make exernal links from editor text.",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"publisher": "usernamehw",
 	"license": "MIT",
 	"engines": {
