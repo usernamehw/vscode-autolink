@@ -1,6 +1,6 @@
-[![Version](https://vsmarketplacebadge.apphb.com/version-short/usernamehw.autolink.svg)](https://marketplace.visualstudio.com/items?itemName=usernamehw.autolink)
-[![Installs](https://vsmarketplacebadge.apphb.com/installs-short/usernamehw.autolink.svg)](https://marketplace.visualstudio.com/items?itemName=usernamehw.autolink)
-[![Rating](https://vsmarketplacebadge.apphb.com/rating-short/usernamehw.autolink.svg)](https://marketplace.visualstudio.com/items?itemName=usernamehw.autolink)
+![Version](https://img.shields.io/visual-studio-marketplace/v/usernamehw.autolink)
+![Installs](https://img.shields.io/visual-studio-marketplace/i/usernamehw.autolink)
+![Rating](https://img.shields.io/visual-studio-marketplace/r/usernamehw.autolink)
 
 Match links in document with external location.
 
