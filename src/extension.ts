@@ -7,7 +7,6 @@ import { ExtensionConfig, StateQueries } from './types';
 export const enum Constants {
 	ExtensionId = 'usernamehw.autolink',
 	ExtensionName = 'autolink',
-	VariableText = '${0}',
 }
 
 export let extensionConfig: ExtensionConfig;
